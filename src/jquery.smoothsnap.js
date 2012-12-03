@@ -3,7 +3,8 @@
     if(!target) target = $("body");
     if(typeof callback != 'function') callback = function(arg){};
     var self = this;
-
+    this.css("-webkit-user-select", "none");
+    this.css("-moz-user-select", "none");
     var start = {
       mouse : { x : null, y : null },
       target : { x : null, y : null }

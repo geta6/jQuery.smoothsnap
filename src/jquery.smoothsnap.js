@@ -2,6 +2,11 @@
   $.fn.smoothsnap = function(opts, callback){
     var target = $("body");
 
+    if(typeof callback != 'function') callback = function(arg){};
+    var self = this;
+    this.css("-webkit-user-select", "none");
+    this.css("-moz-user-select", "none");
+
     var snap = new (function(selector){
       var self = this;
       this.points = [];
@@ -24,27 +29,20 @@
       };
     })(opts.snap);
 
-    if(typeof callback != 'function') callback = function(arg){};
-    var self = this;
-    this.css("-webkit-user-select", "none");
-    this.css("-moz-user-select", "none");
     var start = {
-      mouse : { x : null, y : null },
-      target : { x : null, y : null }
+      mouse : null,
+      target : null
     };
     var mouse_pressing = false;
 
     self.mousedown(function(e){
       mouse_pressing = true;
-      start.mouse.x = e.screenX;
-      start.mouse.y = e.screenY;
-      start.target.x = window.scrollX;
-      start.target.y = window.scrollY;
+      start.mouse = e.screenY;
+      start.target = window.scrollY;
     });
     self.mouseup(function(){
       mouse_pressing = false;
-      start.mouse.x = null;
-      start.mouse.y = null;
+      start.mouse = null;
     });
 
     var distance = function(num){
@@ -61,12 +59,10 @@
 
     self.mousemove(function(e){
       if(mouse_pressing){
-        var dx = e.screenX - start.mouse.x;
-        var dy = e.screenY - start.mouse.y;
-        var x = start.target.x+distance(dx);
-        var y = start.target.y+distance(dy);
+        var dy = e.screenY - start.mouse;
+        var y = start.target + distance(dy);
         console.log(snap.point(y));
-        window.scrollTo(x, snap.point(y));
+        window.scrollTo(window.scrollX, snap.point(y));
       }
     });
     return this;

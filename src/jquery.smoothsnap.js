@@ -61,7 +61,6 @@
       if(mouse_pressing){
         var dy = e.screenY - start.mouse;
         var y = start.target + distance(dy);
-        console.log(snap.point(y));
         window.scrollTo(window.scrollX, snap.point(y));
       }
     });

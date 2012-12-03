@@ -20,7 +20,7 @@ Load jquery.editable.js
 ````
 
 ````javascript
-$("div#main").smoothsnap();
+$("div#main").smoothsnap({snap : $("h3")});
 ````
 
 

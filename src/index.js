@@ -13,5 +13,5 @@ $(function(){
     $("#main").append(section);
   }
 
-  $("body").smoothsnap({snap : $("h3")});
+  $("#main").smoothsnap({snap : $("h3")});
 });

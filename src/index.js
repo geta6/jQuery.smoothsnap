@@ -1,6 +1,4 @@
 $(function(){
-  $("body").smoothsnap();
-
   // insert sample contents
   for(var i = 1; i < 100; i++){
     var section_body = ""
@@ -14,4 +12,6 @@ $(function(){
     );
     $("#main").append(section);
   }
+
+  $("body").smoothsnap({snap : $("h3")});
 });
